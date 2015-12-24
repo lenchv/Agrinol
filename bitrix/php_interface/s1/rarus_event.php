@@ -1,61 +1,65 @@
 <?
-/**
-*	Обработчик события подтверждения оплаты товара
-*/
-function __s1_event_sale_OnSalePayOrder($id, $val)
-{
-	$currentUserId = $GLOBALS['USER']->GetID(); //Идентификатор текущего пользователя, по идее администратор
-	$idRatingGroup = 17;						//группа акции
-	$arOrder=CSaleOrder::GetByID($id);			//информация о заказе
-	$price = intval(ceil(floatval($arOrder["PRICE"])));	//стоимость заказа
-	
-	$userId = intval($arOrder["EMP_PAYED_ID"]);	//пользователь, который оплатил заказ
-	$arUserData = CUser::GetByID($userId)->Fetch();	//Информация о пользователе
-	
-	$userGroups = CUser::GetUserGroup($userId);	//ИД групп, к которым принадлежит пользователь
-	//Если пользователя нет в акционной группе, и он совершил заказ более чем на 900 грн, то добавить его в группу
-	if (!in_array($idRatingGroup, $userGroups)) 
+class CRarusEvents {
+	/**
+	*	Обработчик события подтверждения оплаты товара
+	*/
+	function OnSalePayOrderHandler($id, $val)
 	{
-		if ($price >= 900 && $val === 'Y') 
+		$currentUserId = $GLOBALS['USER']->GetID(); //Идентификатор текущего пользователя, по идее администратор
+		$idRatingGroup = 5;							//группа акции
+		$curTo = "UAH"; 							//тип гривневой цены
+		$arOrder=CSaleOrder::GetByID($id);			//информация о заказе
+		$price = CCurrencyRates::ConvertCurrency(floatval($arOrder["SUM_PAID"]),$arOrder["CURRENCY"], $curTo);
+		$price = intval(ceil($price));				//стоимость заказа
+		$userId = intval($arOrder["USER_ID"]);		//пользователь, который оплатил заказ
+		$arUserData = CUser::GetByID($userId)->Fetch();	//Информация о пользователе	
+		$userGroups = CUser::GetUserGroup($userId);	//ИД групп, к которым принадлежит пользователь
+		
+		//Если пользователя нет в акционной группе, и он совершил заказ более чем на 900 грн, то добавить его в группу
+		if (!in_array($idRatingGroup, $userGroups)) 
 		{
-			$userGroups[] = $idRatingGroup;
-			CUser::SetUserGroup($userId, $userGroups);
-		}	
-	}
-	//Если пользователь, совершивший заказ, в акционной группе
-	if (in_array($idRatingGroup, $userGroups)) 
-	{
+			if ($price >= 900 && $val === 'Y') 
+			{
+				$userGroups[] = $idRatingGroup;
+				CUser::SetUserGroup($userId, $userGroups);
+			}	
+		}
+
 		$points = $price * 5;
 		$payedUser = new CUser;
 		//Если оплата подтверждается, то добавить баллы
-		if ($val === 'Y') 
+		if ($val === 'Y' && in_array($idRatingGroup, $userGroups)) 
 		{
 			$points = intval($arUserData['UF_ACTION_POINTS']) + $points;
 			$payedUser->Update($userId, array( "UF_ACTION_POINTS" => $points));
-		} 
-		//Если оплата отменяется, то вычесть баллы
-		else if ($val === 'N') 
+		} 	
+		else if ($val === 'N')  //Если оплата отменяется, то вычесть баллы
 		{
+			$price = CCurrencyRates::ConvertCurrency(floatval($arOrder["PRICE"]),$arOrder["CURRENCY"], $curTo);
+			$price = intval(ceil($price));				//вычитаем полную стоимость
+			$points = $price*5;
 			if ($arUserData['UF_ACTION_POINTS'] >= $points) 
 			{
 				$points = intval($arUserData['UF_ACTION_POINTS']) - $points;
 				$payedUser->Update($userId, array( "UF_ACTION_POINTS" => $points));
+				//Если очков стало меньше 4500, то исключаем пользователя из группы участников
+				if (in_array($idRatingGroup, $userGroups) && $points < 4500) 
+				{
+					$indexGroup = array_search($idRatingGroup, $userGroups);
+					if (isset($userGroups[$indexGroup]))
+					{
+						unset($userGroups[$indexGroup]);
+						CUser::SetUserGroup($userId, $userGroups);
+					}
+				}
 			}
 		}
-		//file_put_contents($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/s1/log.txt", $payedUser->GetID()."\n", FILE_APPEND | LOCK_EX);	
-	} 
-	//$_GLOBALS['USER'] = $currentUser;
-	/*if ($GLOBALS['USER']->Authorize($currentUserId))
-	{
-		file_put_contents($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/s1/log.txt", "ok\n", FILE_APPEND | LOCK_EX);	
-	} else 
-	{
-		file_put_contents($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/s1/log.txt", "ne ok\n", FILE_APPEND | LOCK_EX);	
-	}*/
-	//file_put_contents($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/s1/log.txt", " ".$price." ".$id." ".$val."\n", FILE_APPEND | LOCK_EX);
+		unset($payedUser);
+	}
 }
+
 /**
 *	Событие, которое проиходит после подтверждения оплаты товара
 */
-AddEventHandler("sale", "OnSalePayOrder", '__s1_event_sale_OnSalePayOrder');
+AddEventHandler("sale", "OnSalePayOrder", array("CRarusEvents", "OnSalePayOrderHandler"));
 ?>
