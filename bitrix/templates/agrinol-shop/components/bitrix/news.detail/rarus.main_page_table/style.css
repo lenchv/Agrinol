@@ -1,0 +1,223 @@
+.action-block {
+	width: 100%;
+	margin: auto;
+	font-size: 12pt;
+	font-family: Helvetica, sans-serif;
+	max-width: 1024px;
+	overflow: hidden;
+}
+.action-block .table-block,
+.action-block .timer-block,
+.action-block .gifts-block {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.action-block .table-block {	
+	width: 70%;
+	height: auto;
+	float: left;
+}
+
+.action-block .table-block .title {
+	color: #e4150d;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5em;
+}
+.action-block .table-block .action-table {
+	width: 100%;
+	font-family: Verdana, sans-serif;
+}
+.action-block .table-block .action-table .action-head {
+	background-color: #126fb4;
+	color: #fff;
+	text-align: left;
+	height: 30px;
+}
+.action-block .table-block .action-table td,
+.action-block .table-block .action-table th {
+	padding: 10px 10px;
+}
+.action-block .table-block .action-table .first-column {
+	text-align: center;
+}
+.action-block .table-block .action-table .action-user td {
+	background-color: #e7f5fe;
+	border-bottom: 4px solid #fff;
+	color: #333;
+	font-size: .9em;
+}
+.action-block .table-block .action-table .action-user.current-user td {
+	background-color: #f6a53c;
+	color: #fff;
+}
+.action-block .table-block .action-table .action-user:hover {
+	opacity: .8;
+}
+.action-block .table-block .action-link-right {
+	float: right;
+}
+.action-block .table-block .action-link-right>a,
+.action-block .table-block .action-link-left>a {
+	color: #49abdf;
+	font-size: .85em;
+}
+/*****************************************************/
+.action-block .timer-block {
+	height: auto;
+	width: 30%;
+	float: right;
+	margin-top: 50px;
+}
+
+.action-block .timer-block .title {
+	color: #3F6B8F;
+	font-weight: bold;
+	font-size: 1.3em;
+	text-align: center;
+}
+.action-block .timer-block .clock-container {
+	clear: both;
+	overflow: hidden;
+}
+.action-block .timer-block .clock {
+	float: left;
+}
+.action-block .timer-block .clock-spinner {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	background-color: #fff;	
+	margin: 10px 0px 0 10px;
+}
+
+.action-block .timer-block .clock-spinner .spinner {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	background-color: #ECEAED;	
+	z-index: 200;
+}
+.action-block .timer-block .clock-spinner .spinner:before {
+	content: "";
+	display: block;
+	width: 50%;
+	height: 100%;
+	border-radius: 50px 0 0 50px;
+	background-color: #EAA630;
+}
+.action-block .timer-block .clock-spinner .filler {
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	z-index: 201;
+}
+.action-block .timer-block .clock-spinner .filler.low-fifth {
+	background-color: #fff;
+	left: 0;
+	border-radius: 0;
+}
+.action-block .timer-block .clock-spinner .filler.high-fifth {
+	right: 0;
+	border-radius: 0 50px 50px 0;
+	background-color: #EAA630;
+}
+.action-block .timer-block .clock-spinner .filler.high-fifth .circle-line {
+	display: none;
+}
+.action-block .timer-block .clock-spinner .filler.low-fifth .circle-line {
+	width: 100%;
+	height: 100%;
+	border-radius: 50px 0 0 50px;
+	display: block;
+	background-color: #ECEAED;
+}
+.action-block .timer-block .clock-spinner .clock-wrapper {
+	width: 70%;
+	height: 70%;
+	border-radius: 50%;
+	background-color: #fff;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	z-index: 300;
+
+	text-align: center;
+	font-size: 3.5em;
+	line-height: 70px;
+	color: #555;
+}
+
+.action-block .timer-block .clock-spinner .clock-wrapper.third-sign {
+	font-size: 2.5em;
+}
+.action-block .timer-block .clock .sign {
+	font-weight: bold;
+	text-align: center;
+	margin-left: 10px;
+}
+/*******************************************/
+.action-block .gifts-block {
+	height: 100px;
+	width: 100%;
+	clear: both;
+	position: relative;
+	
+	float: left;
+	clear: both;
+	margin: 10px 0;
+	background: -webkit-linear-gradient(to right,#CFE7F7, #fff);
+	background: -moz-linear-gradient(to right,#CFE7F7, #fff);
+	background: -ms-linear-gradient(to right,#CFE7F7, #fff);
+	background: -o-linear-gradient(to right,#CFE7F7, #fff);
+	background: linear-gradient(to right,#CFE7F7, #fff);
+}
+
+.action-block .gifts-block .sign-gifts {
+	vertical-align: middle;
+	width: 20%;
+	height: 85px;
+	margin-top: 15px;
+	font-weight: bold;
+	padding-left: 10px;
+	float: left;
+	font-size: 12pt;
+	line-height: 1em;
+}
+
+.action-block .gifts-block .image-container {
+	
+}
+
+.action-block .gifts-block .image-container img {
+	margin: 3px 5px;
+	width: auto;
+	height: 90px;
+	border: 1px solid #3273A7;
+	border-radius: 10px;
+
+	vertical-align: top;
+	cursor: pointer;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.action-block .gifts-block .image-container img:active {
+	border-width: 3px;
+	/*height: 90px;*/
+	margin: 1px 3px;
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+
+.content {
+	border: 1px solid #aaa;
+	width: 50px;
+	height: 200px;
+}
