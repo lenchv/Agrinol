@@ -1,0 +1,127 @@
+.bx-newslist {}
+.bx-newslist-title,
+.bx-newslist-title a {
+	color: #000;
+	margin: 0;
+	font-weight: 600;
+	padding: 2px 0 15px;
+	font-size: 18px;
+	font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.bx-newslist-view,
+.bx-newslist-date,
+.bx-newslist-comments,
+.bx-newslist-author,
+.bx-newslist-other {
+	color: #a4a4a4;
+	font-size: 13px;
+	padding-bottom: 5px;
+	white-space: nowrap;
+}
+.bx-newslist-view i.fa,
+.bx-newslist-date i.fa,
+.bx-newslist-comments i.fa,
+.bx-newslist-author i.fa,
+.bx-newslist-tags i.fa,
+.bx-newslist-other i.fa {
+	width: 13px;
+	color: #b4b4b4;
+}
+.bx-newslist-tags {
+	color: #a4a4a4;
+	font-size: 13px;
+	padding-bottom: 5px;
+}
+.bx-newslist-content {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.bx-newslist-more {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+/*****************************************************/
+/**				ACTION CONTAINER					**/
+/*****************************************************/
+.action-container {
+	font-family: Helvetica, sans-serif;
+	font-size: 12pt;
+	line-height: 1.2em;
+}
+.action-item {
+	opacity: 0.8;
+
+	width: 100%;
+	height: auto;
+	
+	margin-bottom: 30px;
+	padding: 20px;
+	background-color: #F6F6F6;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	min-width: 700px;
+}
+.action-item.active {
+	opacity: 1;
+	-webkit-box-shadow: 0px 0px 30px #aaa;
+	box-shadow: 0px 0px 30px #aaa;
+}
+.action-item .title-line {
+	height: 30px;
+}
+.action-item .title-line .status-action,
+.action-item .title-line .title,
+.action-item .title-line .date-container {
+	display: inline-block;
+}
+.action-item .title-line .status-action {
+	padding: 3px 5px;
+	color: #fff;
+	font-weight: bold;
+	background-color: #5276B2;
+	font-size: .9em;
+	vertical-align: top;
+}
+
+.action-item.active .title-line .status-action {
+	background-color: #D00407;
+}
+.action-item .title-line .title {
+	padding-left: 20px;
+	color: #004E9E;
+	line-height: 30px;
+	font-size: 1.2em;
+}
+.action-item .title-line .title>a {
+	text-decoration: none;
+	color: #004E9E;
+}
+.action-item .title-line .title>a:hover {
+	color: #54A0EF;
+}
+.action-item .title-line .date-container {
+	color: #808080;
+	font-size: .85em;
+	font-weight: bold;
+	float: right;
+	clear: both;
+}
+
+.action-item .description-block {
+	color: #aaa;
+}
+.action-item.active .description-block {
+	color: #333;
+}
+.action-item .detail-line {
+	text-align: right;
+}
+
+.action-item .detail-line>a {
+	color: #2059A0;
+	font-size: .8em;
+}
+.action-item .additional-block {}
+
+/*****************************************************/

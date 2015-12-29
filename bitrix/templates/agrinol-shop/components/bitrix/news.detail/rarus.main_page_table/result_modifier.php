@@ -4,22 +4,24 @@
 *	$arResult["RATING_USERs"] - Получем 3х лидеров акции, если пользователь авторизован, то и его дописываем с пометкой arResult["RATING_USERS"]
 *	$arResult["GIFT"] - пути к изображениям подарков
 *	$arResult["TO_END"] = Array(
-*		["DAYS_LEFT"] - дней осталось до окончания акции
-*		["HOURS_LEFT"] - часов осталось до окончания акции
-*		["DAYS_DEG"] - градус поворота индикатора дней
-*		["HOURS_DEG"] - градус поворота индикатора часов
+*		["DAYS_LEFT"]	- дней осталось до окончания акции
+*		["HOURS_LEFT"]	- часов осталось до окончания акции
+*		["DAYS_DEG"]	- градус поворота индикатора дней
+*		["HOURS_DEG"]	- градус поворота индикатора часов
 *	)	
 */
 //Из инфоблока подтягиваем ИД пользовательского поля с баллами и ИД группы, к которой принадлежат участники акции
 $pointsID = (($arResult["PROPERTIES"]["point_property"]["VALUE"] == "")? $arResult["PROPERTIES"]["point_property"]["~DEFAULT_VALUE"] : $arResult["PROPERTIES"]["point_property"]["~VALUE"]);
 $groupID = intval($arResult["PROPERTIES"]["group"]["VALUE"]);
+$lastDatePurchase = "UF_DATE_LAST_BUY"; //Свойство последней осуществленной покупки пользователем
 $arFilter = array("GROUPS_ID" => array($groupID), "ACTIVE" => "Y");
-$arParams = array(
+$arParamsToDB = array(
 	"SELECT" => array($pointsID),
 	"NAV_PARAMS" => array("nTopCount"=>"3"),
 	"FIELDS" => array("ID","NAME", "LAST_NAME", "SECOND_NAME", "PERSONAL_CITY", "WORK_CITY")
 );
-$rsUsers = CUser::GetList(($by=$pointsID), ($order="desc"), $arFilter, $arParams);
+$order="sort";//игнорируется методом но обязан быть
+$rsUsers = CUser::GetList(($by=array($pointsID => "desc", $lastDatePurchase => "desc")), $order, $arFilter, $arParamsToDB);
 $arResult["RATING_USERS"] = array();
 $userID = ($USER->IsAuthorized())? $USER->GetID() : -1;  //Если пользователь авторизован, то сохраняем его ИД
 $inFirstThree = false;	//Флаг, обозначающий, что авторизованный пользователь в первой тройке
@@ -54,7 +56,7 @@ if ($USER->IsAuthorized() && !$inFirstThree)
 		$user["POINTS"] = intval($arUser[$pointsID]);
 		$user["ID"] = $userID;
 		$user["CURRENT"] = true;
-		$rsUsers = CUser::GetList(($by=$pointsID), ($order="desc"), $arFilter, array("FIELDS" => array("ID")));
+		$rsUsers = CUser::GetList(($by=array($pointsID => "desc", $lastDatePurchase => "desc")), $order, $arFilter, array("FIELDS" => array("ID")));
 		$i = 1;
 		while ($arUser = $rsUsers->GetNext())
 		{

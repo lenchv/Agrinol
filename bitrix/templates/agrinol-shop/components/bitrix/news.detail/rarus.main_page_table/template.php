@@ -30,7 +30,6 @@
 			</tr>
 <?endforeach;?>	
 		</table>
-		<!--НЕ ЗАБУДЬ ЗА УРЛЫ-->
 		<div class="action-link-right"><a href="<?=$arResult["DETAIL_PAGE_URL"]."#rating"?>"><?=GetMessage("ACTION_LOOK_ALL_RATING")?></a></div>
 		<div class="action-link-left"><a href="<?=$arResult["DETAIL_PAGE_URL"]?>"><?=GetMessage("ACTION_CONDITION")?></a></div>
 	</div>

@@ -1,0 +1,195 @@
+.bx-newsdetail {}
+.bx-newsdetail-block {
+	padding: 0 14px;
+	margin-bottom: 40px;
+}
+@media (min-width: 992px) {
+	.bx-newsdetail .bx-newsdetail-container:nth-child(3n+1) {
+		clear: both;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.bx-newsdetail .bx-newsdetail-container:nth-child(2n+1) {
+		clear: both;
+	}
+}
+/* /// */
+.bx-newsdetail-title,
+.bx-newsdetail-title a {
+	color: #000;
+	margin: 0;
+	font-weight: 600;
+	padding: 2px 0 15px;
+	font-size: 18px;
+	border-bottom: none;
+	font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.bx-newsdetail-title a:hover {
+	text-decoration: none;
+	border-bottom-color: transparent;
+}
+.bx-lg .bx-newsdetail-title {
+	font-size: 24pt;
+}
+.bx-md .bx-newsdetail-title {
+	font-size: 20pt;
+}
+.bx-xs .bx-newsdetail-title {
+	font-size: 18pt;
+}
+.bx-newsdetail-separator,
+.bx-newsdetail-view,
+.bx-newsdetail-date,
+.bx-newsdetail-comments,
+.bx-newsdetail-author,
+.bx-newsdetail-other {
+	color: #a4a4a4;
+	font-size: 13px;
+	padding-bottom: 5px;
+	white-space: nowrap;
+}
+.bx-newsdetail-rating,
+.bx-newsdetail-separator,
+.bx-newsdetail-date{
+	display: inline-block;
+}
+.bx-newsdetail-separator {
+	margin: 0 10px;
+}
+.bx-newsdetail-view i.fa,
+.bx-newsdetail-date i.fa,
+.bx-newsdetail-comments i.fa,
+.bx-newsdetail-author i.fa,
+.bx-newsdetail-tags i.fa,
+.bx-newsdetail-other i.fa {
+	width: 13px;
+	color: #b4b4b4;
+}
+.bx-newsdetail-tags {
+	color: #a4a4a4;
+	font-size: 13px;
+	padding-bottom: 5px;
+}
+.bx-newsdetail-content {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+/**********************************************/
+
+.bx-newsdetail-content .table-block {	
+	width: 100%;
+	height: auto;
+	margin: 10px 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.bx-newsdetail-content .table-block .title {
+	color: #e4150d;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5em;
+}
+.bx-newsdetail-content .table-block .action-table {
+	width: 100%;
+	font-family: Verdana, sans-serif;
+}
+.bx-newsdetail-content .table-block .action-table .action-head {
+	background-color: #126fb4;
+	color: #fff;
+	text-align: left;
+	height: 30px;
+}
+.bx-newsdetail-content .table-block .action-table td,
+.bx-newsdetail-content .table-block .action-table th {
+	padding: 10px 10px;
+}
+.bx-newsdetail-content .table-block .action-table .first-column {
+	text-align: center;
+}
+.bx-newsdetail-content .table-block .action-table .action-user td {
+	background-color: #e7f5fe;
+	border-bottom: 4px solid #fff;
+	color: #333;
+	font-size: .9em;
+}
+.bx-newsdetail-content .table-block .action-table .action-user.current-user td {
+	background-color: #f6a53c;
+	color: #fff;
+}
+.bx-newsdetail-content .table-block .action-table .action-user:hover {
+	opacity: .8;
+}
+/*******************************/
+.action-item {
+	width: 100%;
+	height: auto;
+	
+	margin-bottom: 30px;
+	padding: 20px;
+	background-color: #F6F6F6;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	min-width: 700px;
+}
+.action-item.active {
+	opacity: 1;
+}
+.action-item .title-line {
+	height: 30px;
+}
+.action-item .title-line .status-action,
+.action-item .title-line .title,
+.action-item .title-line .date-container {
+	display: inline-block;
+}
+.action-item .title-line .status-action {
+	padding: 3px 5px;
+	color: #fff;
+	font-weight: bold;
+	background-color: #5276B2;
+	font-size: .9em;
+	vertical-align: top;
+}
+
+.action-item.active .title-line .status-action {
+	background-color: #D00407;
+}
+.action-item .title-line .title {
+	padding-left: 20px;
+	color: #2565A9;
+	line-height: 30px;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.action-item .title-line .title>a {
+	text-decoration: none;
+	color: #004E9E;
+}
+.action-item .title-line .date-container {
+	color: #808080;
+	font-size: .85em;
+	font-weight: bold;
+	float: right;
+	clear: both;
+}
+
+.action-item .description-block {
+	color: #aaa;
+}
+.action-item.active .description-block {
+	color: #333;
+}
+.action-item .detail-line {
+	text-align: right;
+}
+
+.action-item .detail-line>a {
+	color: #2059A0;
+	font-size: .8em;
+}
+.action-item .additional-block {}

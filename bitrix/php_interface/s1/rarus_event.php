@@ -14,11 +14,10 @@ class CRarusEvents {
 		$userId = intval($arOrder["USER_ID"]);		//пользователь, который оплатил заказ
 		$arUserData = CUser::GetByID($userId)->Fetch();	//Информация о пользователе	
 		$userGroups = CUser::GetUserGroup($userId);	//ИД групп, к которым принадлежит пользователь
-		
 		//Если пользователя нет в акционной группе, и он совершил заказ более чем на 900 грн, то добавить его в группу
 		if (!in_array($idRatingGroup, $userGroups)) 
 		{
-			if ($price >= 900 && $val === 'Y') 
+			if ($price >= 900 && $price <= 4000 && $val === 'Y') 
 			{
 				$userGroups[] = $idRatingGroup;
 				CUser::SetUserGroup($userId, $userGroups);
@@ -31,7 +30,7 @@ class CRarusEvents {
 		if ($val === 'Y' && in_array($idRatingGroup, $userGroups)) 
 		{
 			$points = intval($arUserData['UF_ACTION_POINTS']) + $points;
-			$payedUser->Update($userId, array( "UF_ACTION_POINTS" => $points));
+			$payedUser->Update($userId, array("UF_ACTION_POINTS" => $points, "UF_DATE_LAST_BUY" => $arOrder["DATE_UPDATE_FORMAT"]));
 		} 	
 		else if ($val === 'N')  //Если оплата отменяется, то вычесть баллы
 		{
